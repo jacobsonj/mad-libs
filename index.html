@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Mad Libs</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Mad Libs</h1>
+
+    <h3>Use your own words to cread hilarious stories!</h3>
+    <div>
+        <h4>Select your story</h4>
+        <input type="radio" class="radio-btn" id="george-washington-radio" name="story-selector" checked>George Washington
+        <input type="radio" class="radio-btn" id="abraham-lincoln-radio" name="story-selector">Abraham Lincoln
+        <input type="radio" class="radio-btn" id="marie-curie-radio" name="story-selector">Marie Curie
+    </div>
+
+    <div>
+        <h4>Pick your words</h4>
+        <h5>Seperate words with a comma and no space. dog,tree,cat,mom</h5>
+        <div>
+            <div>Noun</div>
+            <input type="text" class="word-input" id="noun-input" placeholder="Four words max">
+        </div>
+        <div>
+            <div>Verb</div>
+            <input type="text" class="word-input" id="verb-input" placeholder="Four words max">
+        </div>
+        <div>
+            <div>Adjective</div>
+            <input type="text" class="word-input" id="adjective-input" placeholder="Four words max">
+        </div>
+        <div>
+            <div>Adverb</div>
+            <input type="text" class="word-input" id="adverb-input" placeholder="Four words max">
+        </div>
+    </div>
+
+    <div id="button-holder">
+        <button id="button">Create My Madlib</button>
+    </div>
+
+    <div id="story-holder">story should go here</div>
+
+    <script src="script.js"></script>
+    <!-- <script src="story.js"></script> -->
+</body>
+</html>
