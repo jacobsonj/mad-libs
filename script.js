@@ -16,22 +16,36 @@ var adjectiveInput = document.getElementById('adjective-input')
 
 var adverbInput = document.getElementById('adverb-input')
 
-// var replaceNoun = /{{noun}}/
+var randomNoun = ['mountain', 'bobcat', 'chair', 'piano', 'pillowcase', 'printer', 'skyscraper', 'ball of cheese', 'stick', 'garbagecan'];
 
-var objectNoun = {input: nounInput, array: "", replace: /{{noun}}/, }
-var objectVerb = {input: verbInput, array: "", replace: /{{verb}}/}
-var objectAdjective = {input: adjectiveInput, array: "", replace: /{{adjective}}/}
-var objectAdverb = {input: adverbInput, array: "", replace: /{{adverb}}/}
+var randomVerb = ['eat', 'devour', 'stare', 'climb', 'jump', 'kill', 'poop', 'listen', 'flip out', 'stop'];
+
+var randomAdjective = ['tall', 'dark', 'short', 'evil', 'misunderstood', 'formidable', 'tempestuouse', 'sketchy', 'ugly', 'beautiful'];
+
+var randomAdverb = ['lovingly', 'sarcastically', 'stupidly', 'wisely', 'arrogantly', 'quickly', 'loosley', 'underhandedly', 'decisevely', 'athletically'];
+
+var objectNoun = {input: nounInput, array: '', replace: /{{noun}}/, random: randomNoun}
+
+var objectVerb = {input: verbInput, array: "", replace: /{{verb}}/, random: randomVerb}
+
+var objectAdjective = {input: adjectiveInput, array: "", replace: /{{adjective}}/, random: randomAdjective}
+
+var objectAdverb = {input: adverbInput, array: "", replace: /{{adverb}}/, random: randomAdverb}
 
 var objectArray = [objectNoun, objectVerb, objectAdjective, objectAdverb]
 
+// display mad lib
 button.addEventListener('click', function(){
     var storyFinal = document.createElement('div');
     
+    storyFinal.className = 'story-box';
+
     var blankStory = getBlankStory();
 
     objectArray = getArray(objectArray);
+    
     console.log(objectArray);
+    
     blankStory = fillInStory(blankStory, objectArray);
 
     storyFinal.innerText = blankStory;
@@ -59,19 +73,37 @@ function getBlankStory(){
 // uses objectArray to call individual word objects
 function getArray(arr){
     for(var i = 0; i < arr.length; i++){
-        arr[i].array = getInput(arr[i].input, arr[i].array);
+        arr[i].array = getInput(arr[i].input, arr[i].array, arr[i].random);
     }
     return arr;
 }
 
 // fills object.array with values from UI input boxes
-function getInput(input, str){
-    str = input.value;
+function getInput(input, str, word){
+    if(input.value === ''){
+        str = getRandElem(word);
+    }
+    else{str = input.value;}
     str = str.split(',');
+    while(str.length < 4){
+        var newWord = getRandElem(word);
+        str.push(newWord);
+    }
+
     return str;
 }
 
-// replaces selects objects from objectArray
+// find random element from an array
+function getRandElem(arr){
+    return arr[genRandNum(0,arr.length - 1)];
+}
+
+// Find random number with parameters
+function genRandNum(min,max){
+    return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+// selects objects from objectArray
 function fillInStory(str, arr){
     for(var i = 0; i < arr.length; i++){
         str = replaceWords(arr[i], str);

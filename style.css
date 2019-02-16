@@ -1,0 +1,87 @@
+body{
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #659dbd;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.holder{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;  
+}
+
+#big-holder{
+    display: flex;
+    flex-wrap: wrap;
+    width: 55%;
+    flex-direction: column;
+    justify-content: center; 
+    border: groove;
+    border-color: #306c8d;
+    padding-bottom: 15px;
+}
+
+
+.selector{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+}
+
+.selector > div{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 15px;
+}
+
+.selector > div > div{
+    margin-right: 10px;
+    width: 15%;
+}
+
+h4{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%; 
+    justify-content: flex-start;
+    margin-left: 15px;
+    text-decoration: underline;
+}
+
+h5{
+    margin: 0px;
+}
+
+#button{
+    width: 25%;
+    height: 75px;
+    margin-top: 15px;
+    border-radius: 3px;
+    background-color: #bc986a;
+    transition: background-color .5s;
+}
+
+#button:hover{
+    background-color: #8d8741;
+}
+
+#story-holder{
+    display: flex;
+    flex-wrap: wrap;
+    width: 40%;
+    justify-content: center;
+}
+
+.story-box{
+    display: flex;
+    flex-wrap: wrap;
+    width: 80%;  
+    padding: 15px;
+    border: inset;
+    background-color: #3d5f74;
+    color: rgb(198, 226, 233);   
+}
