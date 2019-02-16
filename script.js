@@ -1,10 +1,3 @@
-var georgeWashingtonStory = "George Lorem ipsum {{noun}} dolor sit amet, {{verb}} consectetur adipiscing {{adjective}} elit, sed do eiusmod {{verb}} tempor incididunt ut labore et dolore {{noun}} magna aliqua. Ut enim ad minim veniam, {{noun}} quis nostrud exercitation {{adjective}} ullamco laboris {{verb}} nisi ut aliquip ex ea commodo {{noun}} consequat. Duis aute irure dolor in reprehenderit {{adjective}} in voluptate velit esse cillum dolore eu {{verb}} fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit {{adjective}} anim id est laborum.";
-
-
-var abrahamLincolnStory = "Abraham Lorem ipsum {{noun}} dolor sit amet, {{verb}} consectetur adipiscing {{adjective}} elit, sed do eiusmod {{verb}} tempor incididunt ut labore et dolore {{noun}} magna aliqua. Ut enim ad minim veniam, {{noun}} quis nostrud exercitation {{adjective}} ullamco laboris {{verb}} nisi ut aliquip ex ea commodo {{noun}} consequat. Duis aute irure dolor in reprehenderit {{adjective}} in voluptate velit esse cillum dolore eu {{verb}} fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit {{adjective}} anim id est laborum.";
-
-var marieCurieStory = "Marie Lorem ipsum {{noun}} dolor sit amet, {{verb}} consectetur adipiscing {{adjective}} elit, sed do eiusmod {{verb}} tempor incididunt ut labore et dolore {{noun}} magna aliqua. Ut enim ad minim veniam, {{noun}} quis nostrud exercitation {{adjective}} ullamco laboris {{verb}} nisi ut aliquip ex ea commodo {{noun}} consequat. Duis aute irure dolor in reprehenderit {{adjective}} in voluptate velit esse cillum dolore eu {{verb}} fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit {{adjective}} anim id est laborum.";
-
 var georgeWashingtonRadio = document.getElementById('george-washington-radio');
 
 var abrahamLincolnRadio = document.getElementById('abraham-lincoln-radio');
@@ -23,31 +16,30 @@ var adjectiveInput = document.getElementById('adjective-input')
 
 var adverbInput = document.getElementById('adverb-input')
 
-var replaceNoun = /{{noun}}/
+// var replaceNoun = /{{noun}}/
+
+var objectNoun = {input: nounInput, array: "", replace: /{{noun}}/, }
+var objectVerb = {input: verbInput, array: "", replace: /{{verb}}/}
+var objectAdjective = {input: adjectiveInput, array: "", replace: /{{adjective}}/}
+var objectAdverb = {input: adverbInput, array: "", replace: /{{adverb}}/}
+
+var objectArray = [objectNoun, objectVerb, objectAdjective, objectAdverb]
 
 button.addEventListener('click', function(){
     var storyFinal = document.createElement('div');
     
     var blankStory = getBlankStory();
 
-    var inputValuesNoun = getInputValuesNoun();
-
-    var filledStory = fillInStory(blankStory, inputValuesNoun, replaceNoun);
-
-    blankStory = filledStory;
-    console.log(inputValuesNoun);
-    
-    // console.log(nounInput.value);
-    // console.log(verbInput.value);
-    // console.log(adjectiveInput.value);
-    // console.log(adverbInput.value);
+    objectArray = getArray(objectArray);
+    console.log(objectArray);
+    blankStory = fillInStory(blankStory, objectArray);
 
     storyFinal.innerText = blankStory;
 
     storyHolder.innerHTML = storyFinal.outerHTML;
 });
 
-// selects story based on radio selection and returns that story
+// calls blank story from variable
 function getBlankStory(){
     var storyBlank = document.createElement('div');
     
@@ -64,25 +56,33 @@ function getBlankStory(){
     return storyBlank;
 }
 
-// calls value from text imput
-function getInputValuesNoun(){
-    
-    var nounString = nounInput.value;
-    nounString = nounString.split(',');
-    return nounString;
+// uses objectArray to call individual word objects
+function getArray(arr){
+    for(var i = 0; i < arr.length; i++){
+        arr[i].array = getInput(arr[i].input, arr[i].array);
+    }
+    return arr;
 }
 
+// fills object.array with values from UI input boxes
+function getInput(input, str){
+    str = input.value;
+    str = str.split(',');
+    return str;
+}
 
-function fillInStory(str, arr, word){
+// replaces selects objects from objectArray
+function fillInStory(str, arr){
     for(var i = 0; i < arr.length; i++){
-        str = str.replace(word, arr[i]);
+        str = replaceWords(arr[i], str);
     }
     return str;
 }
 
-// function fillInStory(str, arr, word){
-//     for(var i = 0; i < arr.length; i++){
-//         str = str.replace(/{{noun}}/, arr[i]);
-//     }
-//     return str;
-// }
+// uses values from object.array to replace {{words}} from object.replace
+function replaceWords(object, str){
+    for(var i = 0; i < object.array.length; i++){
+    str = str.replace(object.replace, object.array[i]);
+    }
+    return str;
+}
